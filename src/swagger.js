@@ -6,11 +6,24 @@ const doc = {
     title: "Calculate Funding",
     description: "API to calculate funding"
   },
-  host: "localhost:3000",
+  host: "localhost:4000",
   basePath: "/",
   schemes: ["http", "https"],
   consumes: ["application/json"],
-  produces: ["application/json"]
+  produces: ["application/json"],
+  definitions: {
+    Funding: {
+      $name: "Jhon Doe",
+      $date: "20/12/2022",
+      $syscredit: "SAC",
+      $deadlineyear: "15",
+      $monthlyincome: "12.000",
+      $value: "300.000",
+      $signal: "20.000",
+      $state: "RJ",
+      $email: "exemplo@gmail.com"
+    }
+  }
 };
 
 const outputFile = "./src/swagger-output.json";

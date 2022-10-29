@@ -5,7 +5,7 @@
     "title": "Calculate Funding",
     "description": "API to calculate funding"
   },
-  "host": "localhost:3000",
+  "host": "localhost:4000",
   "basePath": "/",
   "schemes": [
     "http",
@@ -18,16 +18,85 @@
     "application/json"
   ],
   "paths": {
-    "/funding/": {
-      "get": {
+    "/funding/calculate": {
+      "post": {
         "description": "",
-        "parameters": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "detail funding",
+            "schema": {
+              "$ref": "#/definitions/Funding"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
+    }
+  },
+  "definitions": {
+    "Funding": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Jhon Doe"
+        },
+        "date": {
+          "type": "string",
+          "example": "20/12/2022"
+        },
+        "syscredit": {
+          "type": "string",
+          "example": "SAC"
+        },
+        "deadlineyear": {
+          "type": "string",
+          "example": "15"
+        },
+        "monthlyincome": {
+          "type": "string",
+          "example": "12.000"
+        },
+        "value": {
+          "type": "string",
+          "example": "300.000"
+        },
+        "signal": {
+          "type": "string",
+          "example": "20.000"
+        },
+        "state": {
+          "type": "string",
+          "example": "RJ"
+        },
+        "email": {
+          "type": "string",
+          "example": "exemplo@gmail.com"
+        }
+      },
+      "required": [
+        "name",
+        "date",
+        "syscredit",
+        "deadlineyear",
+        "monthlyincome",
+        "value",
+        "signal",
+        "state",
+        "email"
+      ]
     }
   }
 }

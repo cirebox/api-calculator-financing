@@ -3,7 +3,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 
 const swaggerUi = require("swagger-ui-express");
-const swaggerFile = require("../src/swagger-output.json");
+const swaggerFile = require("./swagger-output.json");
 
 const fundingRouter = require("./routes/funding");
 
