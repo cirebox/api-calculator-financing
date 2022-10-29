@@ -1,0 +1,31 @@
+{
+  "name": "api-calculator-financing",
+  "version": "1.0.0",
+  "description": "API to calculate funding",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./src/index.js",
+    "start": "node ./src/index.js",
+    "swagger-autogen": "node ./src/swagger.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cirebox/api_calculator_financing.git"
+  },
+  "homepage": "https://github.com/cirebox/api_calculator_financing#readme",
+  "author": "cirebox",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cirebox/api_calculator_financing/issues"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "morgan": "^1.10.0",
+    "swagger-autogen": "^2.22.0",
+    "swagger-ui-express": "^4.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
