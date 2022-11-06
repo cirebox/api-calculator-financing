@@ -49,35 +49,35 @@
     "Funding": {
       "type": "object",
       "properties": {
-        "name": {
+        "nome": {
           "type": "string",
           "example": "Jhon Doe"
         },
-        "date": {
+        "data": {
           "type": "string",
           "example": "20/12/2022"
         },
-        "syscredit": {
+        "tipo": {
           "type": "string",
-          "example": "SAC"
+          "example": "TP"
         },
-        "deadlineyear": {
+        "anos": {
           "type": "string",
           "example": "15"
         },
-        "monthlyincome": {
+        "renda": {
           "type": "string",
-          "example": "12.000"
+          "example": "5000"
         },
-        "value": {
+        "valor": {
           "type": "string",
-          "example": "300.000"
+          "example": "300000"
         },
-        "signal": {
+        "entrada": {
           "type": "string",
-          "example": "20.000"
+          "example": "20"
         },
-        "state": {
+        "uf": {
           "type": "string",
           "example": "RJ"
         },
@@ -87,14 +87,14 @@
         }
       },
       "required": [
-        "name",
-        "date",
-        "syscredit",
-        "deadlineyear",
-        "monthlyincome",
-        "value",
-        "signal",
-        "state",
+        "nome",
+        "data",
+        "tipo",
+        "anos",
+        "renda",
+        "valor",
+        "entrada",
+        "uf",
         "email"
       ]
     }
