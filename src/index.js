@@ -1,6 +1,9 @@
 const express = require("express");
-const morgan = require("morgan");
+const logger = require("morgan");
 const cors = require("cors");
+const compression = require("compression");
+var cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
 
 require("dotenv").config();
 
@@ -15,10 +18,30 @@ const PORT = process.env.PORT || 4000;
 // app configs.
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(morgan("dev"));
-app.use(cors());
+app.use(compression());
+app.use(cors("*"));
+app.use(cookieParser());
+app.disable("x-powered-by");
+
+//Limitar o tamanho do json
+app.use(
+  bodyParser.json({
+    limit: "1mb"
+    //type: "application/*+json"
+  })
+);
+
+//Faz um parse do body
+app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use("/funding", fundingRouter);
 app.use("/doc", swaggerUi.serve, swaggerUi.setup(swaggerFile));
+
+app.use(
+  logger(
+    ":remote-addr :remote-user :method :url HTTP/:http-version :status [:date] :res[content-length] - :response-time ms"
+  )
+);
 
 //initialize the app.
 async function initialize() {
