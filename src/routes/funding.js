@@ -18,11 +18,23 @@ router.post("/calculate", async (req, res, next) => {
     let result = [];
     let anos = req.body.anos;
     let entrada = (req.body.valor * req.body.entrada) / 100;
+
+    if (req.body.entrada < 20.0) {
+      return res.status(400).send({
+        code: 400,
+        message: "Valor mínimo de entrada deve ser 20%"
+      });
+    }
+
     let valor = req.body.valor - entrada;
+
+    let limitParcela = (req.body.renda * 30) / 100;
+
     //busca os bancos e tarifas
 
     let updateAt = await sql`SELECT max(bancos."updateAt") FROM bancos`;
     let lista = await sql`SELECT * FROM bancos WHERE
+      bancos.ativo = true AND 
       bancos.renda_minima <= ${req.body.renda} AND
       bancos.valor_maximo >= ${req.body.valor} AND
       bancos.entrada <= ${req.body.entrada}`;
@@ -65,7 +77,10 @@ router.post("/calculate", async (req, res, next) => {
           link: banco.link,
           updateAt: banco.updateAt
         };
-        result.push(data);
+
+        if (vparcela <= limitParcela) {
+          result.push(data);
+        }
       })
     );
 
@@ -102,18 +117,18 @@ async function calculaParcela(c, n, i, type) {
     let juros = c * i;
     let pmt = amort + juros;
 
-    console.log("Juros => ", juros.toFixed(2));
-    console.log("Amortização => ", amort.toFixed(2));
-    console.log("Parcela => ", pmt.toFixed(2));
+    // console.log("Juros => ", juros.toFixed(2));
+    // console.log("Amortização => ", amort.toFixed(2));
+    // console.log("Parcela => ", pmt.toFixed(2));
 
     return pmt.toFixed(2);
   } else if (type === "TP") {
     c = c - iof;
     let pmt = (c * ((1 + i) ** n * i)) / ((1 + i) ** n - 1);
 
-    console.log("Juros => ", (c * i).toFixed(2));
-    console.log("Amortização => ", pmt - c * i);
-    console.log("Parcela => ", pmt.toFixed(2));
+    // console.log("Juros => ", (c * i).toFixed(2));
+    // console.log("Amortização => ", pmt - c * i);
+    // console.log("Parcela => ", pmt.toFixed(2));
 
     return pmt.toFixed(2);
   }
