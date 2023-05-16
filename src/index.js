@@ -13,7 +13,7 @@ const swaggerFile = require("./swagger-output.json");
 const fundingRouter = require("./routes/funding");
 
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.port || 4000;
 
 // app configs.
 app.use(express.json());
