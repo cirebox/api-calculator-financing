@@ -34,7 +34,7 @@ router.post("/calculate", async (req, res, next) => {
 
     let updateAt = await sql`SELECT max(bancos."updateAt") FROM bancos`;
     let lista = await sql`SELECT * FROM bancos WHERE
-      bancos.ativo = true AND 
+      bancos.ativo = true AND
       bancos.renda_minima <= ${req.body.renda} AND
       bancos.valor_maximo >= ${req.body.valor} AND
       bancos.entrada <= ${req.body.entrada}`;
